@@ -12,6 +12,9 @@ endif
 # disabled by default as they hang at the moment for Async
 # NETTESTS ?= --enable-nettests
 
+setup.ml:
+	oasis setup
+
 setup.bin: setup.ml
 	ocamlopt.opt -o $@ $< || ocamlopt -o $@ $< || ocamlc -o $@ $<
 	rm -f setup.cmx setup.cmi setup.o setup.cmo
@@ -40,4 +43,4 @@ reinstall: setup.bin
 
 clean:
 	ocamlbuild -clean
-	rm -f setup.data setup.log setup.bin
+	rm -f setup.data setup.log setup.bin setup.ml
