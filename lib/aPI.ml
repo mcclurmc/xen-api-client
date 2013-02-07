@@ -12,7 +12,7 @@
  * GNU Lesser General Public License for more details.
  *)
 
-open Date
+open ClientDate
 
 type failure = string * (string list) with rpc
 let response_of_failure code params =
@@ -32,9 +32,9 @@ module Ref = struct
 end
 
 module Date = struct
-  include Date
-  let rpc_of_iso8601 x = DateTime (Date.to_string x)
-  let iso8601_of_rpc = function String x | DateTime x -> Date.of_string x | _ -> failwith "Date.iso8601_of_rpc"
+  include ClientDate
+  let rpc_of_iso8601 x = DateTime (ClientDate.to_string x)
+  let iso8601_of_rpc = function String x | DateTime x -> ClientDate.of_string x | _ -> failwith "Date.iso8601_of_rpc"
 end
 
 let on_dict f = function | Rpc.Dict x -> f x | _ -> failwith "Expected Dictionary"
